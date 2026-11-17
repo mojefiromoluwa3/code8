@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CODE-8 | Good Food, Great Vibes - Pick Up & Delivery</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%230e3822'/><text x='50' y='64' font-family='sans-serif' font-size='42' font-weight='900' fill='%23facc15' text-anchor='middle'>C8</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              green: {
+                DEFAULT: '#0e3822',
+                dark: '#082516',
+                deep: '#061c11',
+                light: '#185635',
+                soft: '#edf7f1',
+              },
+              gold: {
+                DEFAULT: '#eab308',
+                hover: '#ca8a04',
+                bright: '#facc15',
+                light: '#fef08a',
+                subtle: '#fefce8',
+              },
+              cream: {
+                DEFAULT: '#faf7f2',
+                card: '#ffffff',
+                soft: '#f4efe6',
+                border: '#e7ded2',
+              },
+              charcoal: {
+                DEFAULT: '#1c221e',
+                muted: '#525d56',
+                light: '#849189',
+              }
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+            display: ['Outfit', 'Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #faf7f2; color: #1c221e; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
+    h1, h2, h3, h4, h5, h6 { font-family: 'Outfit', sans-serif; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #f4efe6; }
+    ::-webkit-scrollbar-thumb { background: #144c2f; border-radius: 4px; }
+  </style>
+</head>
+<body class="antialiased selection:bg-brand-gold-bright selection:text-brand-green-dark">
+
+  <!-- STICKY HEADER -->
+  <header id="main-header" class="fixed top-0 left-0 right-0 z-40 bg-brand-cream/90 backdrop-blur-md border-b border-brand-cream-border/60 py-3.5 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between gap-4">
+        <!-- Brand Wordmark -->
+        <a href="#home" class="inline-flex items-center gap-2.5 font-display select-none">
+          <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-brand-green text-brand-gold-bright font-black text-xl shadow-md border border-brand-green-light">
+            C8
+          </div>
+          <div class="flex flex-col leading-none">
+            <span class="text-2xl font-black text-brand-green tracking-tight">CODE<span class="text-brand-gold-bright">-8</span></span>
+            <span class="text-[9.5px] font-bold text-brand-charcoal-muted tracking-widest uppercase mt-0.5">Good Food &bull; Great Vibes</span>
+          </div>
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex items-center gap-1 bg-brand-green-soft/70 px-3 py-1.5 rounded-full border border-brand-cream-border/70 text-xs font-bold">
+          <a href="#home" class="px-3.5 py-1.5 rounded-full text-brand-charcoal hover:text-brand-green hover:bg-white/60 transition-all">Home</a>
+          <a href="#menu" class="px-3.5 py-1.5 rounded-full text-brand-charcoal hover:text-brand-green hover:bg-white/60 transition-all">Menu</a>
+          <a href="#about" class="px-3.5 py-1.5 rounded-full text-brand-charcoal hover:text-brand-green hover:bg-white/60 transition-all">About</a>
+          <a href="#services" class="px-3.5 py-1.5 rounded-full text-brand-charcoal hover:text-brand-green hover:bg-white/60 transition-all">Pickup & Delivery</a>
+          <a href="#contact" class="px-3.5 py-1.5 rounded-full text-brand-charcoal hover:text-brand-green hover:bg-white/60 transition-all">Contact</a>
+        </nav>
+
+        <!-- Header Actions -->
+        <div class="flex items-center gap-2.5">
+          <a href="tel:08069489508" class="hidden lg:inline-flex items-center gap-1.5 text-xs font-semibold text-brand-charcoal hover:text-brand-green px-3 py-2">
+            <span>📞 08069489508</span>
+          </a>
+
+          <!-- Cart Trigger -->
+          <button id="open-cart-btn" class="relative p-2.5 rounded-xl bg-white text-brand-charcoal border border-brand-cream-border hover:bg-brand-green-soft shadow-sm transition-all" aria-label="View Order Tray">
+            <span class="text-lg">🛍️</span>
+            <span id="header-cart-badge" class="hidden absolute -top-1.5 -right-1.5 min-w-[20px] h-[20px] px-1 bg-brand-gold text-brand-green-dark text-xs font-extrabold rounded-full flex items-center justify-center">0</span>
+          </button>
+
+          <!-- Order Now -->
+          <a href="#menu" class="hidden sm:inline-flex items-center justify-center px-4 py-2.5 rounded-xl bg-brand-gold hover:bg-brand-gold-hover text-brand-green-dark text-xs font-extrabold uppercase tracking-wide shadow-sm">
+            Order Now
+          </a>
+
+          <!-- Mobile Toggle -->
+          <button id="mobile-toggle" class="md:hidden p-2 rounded-xl border border-brand-cream-border text-brand-green">
+            ☰
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-nav" class="hidden md:hidden px-4 pt-3 pb-6 bg-brand-cream border-t border-brand-cream-border space-y-2 mt-2">
+      <a href="#home" class="block px-3 py-2 rounded-lg font-bold text-brand-charcoal hover:bg-brand-green-soft">Home</a>
+      <a href="#menu" class="block px-3 py-2 rounded-lg font-bold text-brand-charcoal hover:bg-brand-green-soft">Menu</a>
+      <a href="#about" class="block px-3 py-2 rounded-lg font-bold text-brand-charcoal hover:bg-brand-green-soft">About</a>
+      <a href="#services" class="block px-3 py-2 rounded-lg font-bold text-brand-charcoal hover:bg-brand-green-soft">Pickup & Delivery</a>
+      <a href="#contact" class="block px-3 py-2 rounded-lg font-bold text-brand-charcoal hover:bg-brand-green-soft">Contact</a>
+      <div class="pt-2 border-t border-brand-cream-border/70 flex flex-col gap-2">
+        <a href="#menu" class="w-full py-2.5 text-center bg-brand-gold text-brand-green-dark rounded-xl font-extrabold text-xs uppercase">Order Now</a>
+        <a href="tel:08069489508" class="w-full py-2 text-center bg-white border border-brand-cream-border text-brand-charcoal rounded-xl text-xs font-bold">Call: 08069489508</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section id="home" class="pt-28 pb-16 md:pt-36 md:pb-24 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <!-- Left Content -->
+        <div class="lg:col-span-7 flex flex-col items-start text-left">
+          <div class="flex flex-wrap items-center gap-2 mb-4">
+            <span class="px-3.5 py-1.5 rounded-full bg-brand-green text-brand-gold-bright text-xs font-black uppercase tracking-wider">
+              🚚 Pick Up & Delivery
+            </span>
+            <span class="px-3 py-1.5 rounded-full bg-brand-gold-light/60 text-brand-green-dark text-xs font-black tracking-wide border border-brand-gold/30">
+              ✨ Our Code-Ate.
+            </span>
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl md:text-6xl font-black text-brand-green tracking-tight leading-[1.1] mb-4">
+            Good Food, <br class="hidden sm:inline">
+            <span class="text-brand-green">Great Vibes<span class="text-brand-gold">.</span></span>
+          </h1>
+
+          <p class="text-lg text-brand-charcoal-muted max-w-xl font-normal leading-relaxed mb-8">
+            Enjoy delicious meals, snacks and refreshing drinks from <strong class="font-bold text-brand-green">CODE-8</strong>. Available for pickup and delivery.
+          </p>
+
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 w-full sm:w-auto">
+            <a href="#menu" class="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-brand-green hover:bg-brand-green-light text-brand-gold-bright font-extrabold text-sm uppercase tracking-wide shadow-md transition-all">
+              <span>🍽️ Explore Our Menu</span>
+            </a>
+            <a href="https://wa.me/2348069489508?text=Hello%20CODE-8!%20%F0%9F%8D%BD%20I%20would%20like%20to%20place%20an%20order." target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-brand-gold hover:bg-brand-gold-hover text-brand-green-dark font-extrabold text-sm uppercase tracking-wide shadow-md transition-all">
+              <span>💬 Order on WhatsApp</span>
+            </a>
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-brand-cream-border grid grid-cols-1 sm:grid-cols-3 gap-3 w-full text-xs font-bold text-brand-charcoal">
+            <div class="flex items-center gap-2"><span>✅</span> Fresh Meals Daily</div>
+            <div class="flex items-center gap-2"><span>✅</span> Affordable & Pocket Friendly Meals</div>
+            <div class="flex items-center gap-2"><span>✅</span> Quality Food Always</div>
+          </div>
+        </div>
+
+        <!-- Right Visual Showcase -->
+        <div class="lg:col-span-5 relative">
+          <div class="bg-white rounded-3xl p-5 shadow-xl border border-brand-cream-border">
+            <div class="rounded-2xl overflow-hidden aspect-[4/3] bg-brand-green relative mb-3">
+              <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80" alt="Nigerian Jollof Rice" class="w-full h-full object-cover">
+              <div class="absolute top-3 left-3 bg-brand-green/90 text-brand-gold-bright px-3 py-1 rounded-full text-xs font-black">
+                Hot & Fresh Daily
+              </div>
+              <div class="absolute bottom-3 left-3 right-3 text-white">
+                <span class="text-xs text-brand-gold-light uppercase tracking-wider block">CODE-8 Favourite</span>
+                <span class="text-lg font-black">Party Jollof, Amala, Snacks & Zobo</span>
+              </div>
+            </div>
+            <div class="grid grid-cols-3 gap-2">
+              <div class="rounded-xl overflow-hidden aspect-square bg-brand-cream-soft"><img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=300&q=80" alt="Amala" class="w-full h-full object-cover"></div>
+              <div class="rounded-xl overflow-hidden aspect-square bg-brand-cream-soft"><img src="https://images.unsplash.com/photo-1562007908-859b4ba9a1a2?auto=format&fit=crop&w=300&q=80" alt="Pie" class="w-full h-full object-cover"></div>
+              <div class="rounded-xl overflow-hidden aspect-square bg-brand-cream-soft"><img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=300&q=80" alt="Zobo" class="w-full h-full object-cover"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU SECTION -->
+  <section id="menu" class="py-20 bg-brand-cream/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="px-3.5 py-1 rounded-full bg-brand-gold-subtle text-brand-green font-bold text-xs uppercase tracking-wider border border-brand-gold/30">
+          Freshly Prepared Daily
+        </span>
+        <h2 class="text-3xl sm:text-5xl font-black text-brand-green tracking-tight mt-3 mb-2">
+          Explore Our Menu
+        </h2>
+        <p className="text-base text-brand-charcoal-muted">
+          Good food, great vibes. Find something delicious.
+        </p>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="flex flex-wrap items-center justify-center gap-2 mb-10">
+        <button onclick="filterCategory('all')" class="cat-btn active px-4 py-2 rounded-xl text-xs font-bold bg-brand-green text-brand-gold-bright shadow-sm" data-category="all">All Items (9)</button>
+        <button onclick="filterCategory('meals')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold bg-white text-brand-charcoal border border-brand-cream-border" data-category="meals">Main Meals (4)</button>
+        <button onclick="filterCategory('snacks')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold bg-white text-brand-charcoal border border-brand-cream-border" data-category="snacks">Snacks (3)</button>
+        <button onclick="filterCategory('drinks')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold bg-white text-brand-charcoal border border-brand-cream-border" data-category="drinks">Drinks (2)</button>
+      </div>
+
+      <!-- Menu Grid -->
+      <div id="menu-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <!-- Injected via JavaScript below -->
+      </div>
+    </div>
+  </section>
+
+  <!-- BRAND PROMISES / ABOUT SECTION -->
+  <section id="about" class="py-20 bg-brand-green text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="px-3.5 py-1 rounded-full bg-brand-green-light text-brand-gold-bright text-xs font-black uppercase tracking-wider">
+          Our Brand Commitments
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-black mt-3 mb-3">Good Food, Great Vibes.</h2>
+        <p class="text-sm sm:text-base text-brand-cream-soft/80">Every meal is prepared with care to bring quality Nigerian flavours to your table.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-brand-green-light/40 rounded-3xl p-8 border border-white/10">
+          <div class="text-3xl mb-4">🍲</div>
+          <h3 class="text-xl font-black text-brand-gold-bright mb-2">Fresh Meals Daily</h3>
+          <p class="text-xs sm:text-sm text-brand-cream-soft/85 leading-relaxed">Cooked fresh every day to ensure every plate brings peak flavour and nourishment to your table.</p>
+        </div>
+
+        <div class="bg-brand-green-light/40 rounded-3xl p-8 border border-white/10">
+          <div class="text-3xl mb-4">🤝</div>
+          <h3 class="text-xl font-black text-brand-gold-bright mb-2">Affordable & Pocket Friendly Meals</h3>
+          <p class="text-xs sm:text-sm text-brand-cream-soft/85 leading-relaxed">Generous, satisfying Nigerian meals and snacks priced with your daily comfort and budget in mind.</p>
+        </div>
+
+        <div class="bg-brand-green-light/40 rounded-3xl p-8 border border-white/10">
+          <div class="text-3xl mb-4">🛡️</div>
+          <h3 class="text-xl font-black text-brand-gold-bright mb-2">Quality Food Always</h3>
+          <p class="text-xs sm:text-sm text-brand-cream-soft/85 leading-relaxed">Consistent care, rich taste, and strict culinary standards in every portion we prepare.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PICKUP & DELIVERY SECTION -->
+  <section id="services" class="py-20 bg-brand-cream">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <span class="px-3.5 py-1 rounded-full bg-brand-green-soft text-brand-green font-bold text-xs uppercase tracking-wider border border-brand-green/20">
+          Convenient Service
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-black text-brand-green mt-3 mb-2">Pick Up & Delivery</h2>
+        <p class="text-sm sm:text-base text-brand-charcoal-muted">Choose the option that fits your schedule. Contact CODE-8 to arrange your meal today.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div class="bg-white rounded-3xl p-8 border border-brand-cream-border shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="text-3xl mb-4">🏬</div>
+            <span class="px-2.5 py-0.5 rounded-full bg-brand-green text-brand-gold-bright text-[11px] font-black uppercase">Option 01</span>
+            <h3 class="text-2xl font-black text-brand-green mt-2 mb-3">Pick Up</h3>
+            <p class="text-xs sm:text-sm text-brand-charcoal-muted leading-relaxed mb-4">
+              Prefer to collect your meal yourself? Contact CODE-8 in advance to confirm meal availability and pickup time. Your food will be freshly packed and ready for quick collection at our Magodo hub.
+            </p>
+            <p class="text-xs text-brand-charcoal font-bold">📍 8thGear Hub, 41 CMD Road, Magodo Secretariat, Lagos.</p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-brand-cream-border">
+            <button onclick="openCart()" class="w-full py-2.5 rounded-xl bg-brand-cream-soft text-brand-charcoal font-bold text-xs uppercase hover:bg-brand-green hover:text-white transition-all">Select for Pickup</button>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-3xl p-8 border border-brand-cream-border shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="text-3xl mb-4">🛵</div>
+            <span class="px-2.5 py-0.5 rounded-full bg-brand-gold text-brand-green-dark text-[11px] font-black uppercase">Option 02</span>
+            <h3 class="text-2xl font-black text-brand-green mt-2 mb-3">Delivery</h3>
+            <p class="text-xs sm:text-sm text-brand-charcoal-muted leading-relaxed mb-4">
+              Enjoy hot, delicious meals delivered right to your home, office, or designated location. Contact CODE-8 with your location details to arrange dispatch and meal preparation.
+            </p>
+            <p class="text-xs text-brand-charcoal font-bold">📦 Carefully packaged to preserve freshness & temperature during transit.</p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-brand-cream-border">
+            <button onclick="openCart()" class="w-full py-2.5 rounded-xl bg-brand-cream-soft text-brand-charcoal font-bold text-xs uppercase hover:bg-brand-green hover:text-white transition-all">Select for Delivery</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-brand-green text-white rounded-3xl p-8 text-center max-w-2xl mx-auto shadow-md">
+        <h3 class="text-2xl font-black mb-2">Ready to Arrange Your Order?</h3>
+        <p class="text-xs sm:text-sm text-brand-cream-soft/80 mb-6">Contact our direct hotline to confirm menu availability and get your meal prepared.</p>
+        <a href="https://wa.me/2348069489508?text=Hello%20CODE-8!%20%F0%9F%8D%BD%20I%20would%20like%20to%20arrange%20an%20order%20for%20pickup%20or%20delivery." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-brand-gold hover:bg-brand-gold-hover text-brand-green-dark font-black text-xs uppercase tracking-wide">
+          <span>💬 Arrange Your Order on WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT & LOCATION SECTION -->
+  <section id="contact" class="py-20 bg-brand-cream/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <span class="px-3.5 py-1 rounded-full bg-brand-gold-subtle text-brand-green font-bold text-xs uppercase tracking-wider border border-brand-gold/30">
+          Get In Touch
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-black text-brand-green mt-3 mb-2">Contact & Location</h2>
+        <p class="text-sm text-brand-charcoal-muted">Connect with CODE-8 directly via phone, WhatsApp, or visit our Magodo pickup hub.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        <div class="lg:col-span-5 space-y-4 flex flex-col justify-between">
+          <div class="bg-white rounded-3xl p-6 border border-brand-cream-border shadow-sm">
+            <span class="text-xs font-black uppercase text-brand-charcoal-muted block mb-2">Phone & WhatsApp</span>
+            <h3 class="text-2xl font-black text-brand-green mb-1">08069489508</h3>
+            <p class="text-xs text-brand-charcoal-muted mb-4">Official customer contact line</p>
+            <div class="grid grid-cols-2 gap-2">
+              <a href="tel:08069489508" class="py-2.5 text-center bg-brand-green text-brand-gold-bright rounded-xl text-xs font-bold uppercase">Call</a>
+              <a href="https://wa.me/2348069489508" target="_blank" class="py-2.5 text-center bg-brand-gold text-brand-green-dark rounded-xl text-xs font-bold uppercase">WhatsApp</a>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-3xl p-6 border border-brand-cream-border shadow-sm">
+            <span class="text-xs font-black uppercase text-brand-charcoal-muted block mb-2">Business Address</span>
+            <h3 class="text-base font-black text-brand-green mb-1">8thGear Hub</h3>
+            <p class="text-xs text-brand-charcoal leading-relaxed mb-4">41 CMD Road, Magodo Secretariat, Lagos.</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=8thGear+Hub,+41+CMD+Road,+Magodo+Secretariat,+Lagos" target="_blank" rel="noopener noreferrer" class="block py-2 text-center bg-brand-cream-soft border border-brand-cream-border rounded-xl text-xs font-bold text-brand-charcoal">
+              Open Address in Google Maps ↗
+            </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 bg-white rounded-3xl p-4 border border-brand-cream-border shadow-sm min-h-[360px] flex flex-col">
+          <div class="text-xs font-bold text-brand-green pb-2 mb-2 border-b border-brand-cream-border flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Verified Location Map
+          </div>
+          <iframe title="CODE-8 Map" src="https://maps.google.com/maps?q=8thGear%20Hub,%2041%20CMD%20Road,%20Magodo%20Secretariat,%20Lagos&t=&z=15&ie=UTF8&iwloc=&output=embed" class="w-full flex-1 rounded-2xl border-0 min-h-[300px]"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-brand-green-deep text-white pt-16 pb-12 border-t border-brand-green-light">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10 border-b border-white/10">
+        <div class="md:col-span-6 space-y-2">
+          <div class="text-2xl font-black text-white">CODE<span class="text-brand-gold-bright">-8</span></div>
+          <p class="text-lg font-bold text-brand-gold-bright">Good Food, Great Vibes.</p>
+          <p class="text-xs text-brand-gold-light uppercase tracking-wider">Our Code-Ate.</p>
+          <p class="text-xs text-brand-cream-soft/70 max-w-sm pt-2">Fresh meals daily, pocket friendly Nigerian meals, snacks, and drinks. Available for pickup & delivery.</p>
+        </div>
+        <div class="md:col-span-6 space-y-2 text-xs text-brand-cream-soft/80">
+          <h4 class="font-black text-brand-gold-bright uppercase tracking-widest mb-3">Official Business Details</h4>
+          <p>📞 Phone / WhatsApp: <a href="tel:08069489508" class="text-white font-bold hover:underline">08069489508</a></p>
+          <p>📍 Address: 8thGear Hub, 41 CMD Road, Magodo Secretariat, Lagos.</p>
+          <p class="pt-2">🔗 <a href="#home" class="hover:underline">Home</a> &bull; <a href="#menu" class="hover:underline">Menu</a> &bull; <a href="#about" class="hover:underline">About</a> &bull; <a href="#services" class="hover:underline">Pickup & Delivery</a> &bull; <a href="#contact" class="hover:underline">Contact</a></p>
+        </div>
+      </div>
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-brand-cream-soft/50 gap-2">
+        <p>&copy; <span id="current-year"></span> CODE-8. All rights reserved.</p>
+        <p>Built strictly in compliance with the CODE-8 promotional flyer specification.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ORDER DRAWER SLIDEOVER -->
+  <div id="order-drawer" class="hidden fixed inset-0 z-50 overflow-hidden" role="dialog" aria-modal="true">
+    <div class="fixed inset-0 bg-brand-green-deep/60 backdrop-blur-sm" onclick="closeCart()"></div>
+    <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
+      <div class="w-screen max-w-md bg-white shadow-2xl flex flex-col justify-between">
+        <!-- Drawer Header -->
+        <div class="px-6 py-5 bg-brand-green text-white flex items-center justify-between border-b border-brand-green-light">
+          <div class="flex items-center gap-2">
+            <span class="text-xl">🛍️</span>
+            <div>
+              <h3 class="text-base font-black text-brand-gold-bright">Your Order Tray</h3>
+              <p id="drawer-item-count" class="text-xs text-brand-cream-soft/80">0 items selected</p>
+            </div>
+          </div>
+          <button onclick="closeCart()" class="text-white hover:text-brand-gold-bright text-xl font-bold p-1">✕</button>
+        </div>
+
+        <!-- Drawer Content -->
+        <div id="drawer-items-list" class="flex-1 overflow-y-auto px-6 py-5 space-y-4">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Drawer Footer Form -->
+        <div id="drawer-footer" class="p-6 bg-brand-cream border-t border-brand-cream-border space-y-3">
+          <!-- Details form injected by JS when items exist -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT APP LOGIC -->
+  <script>
+    // Menu Data from Flyer
+    const MENU_ITEMS = [
+      { id: 'jollof-rice', name: 'Jollof Rice', category: 'meals', categoryLabel: 'Main Meals', desc: 'Classic party-style seasoned rice prepared fresh with rich aromatic savoury spices.', img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80', badge: 'Popular Choice' },
+      { id: 'amala', name: 'Amala', category: 'meals', categoryLabel: 'Main Meals', desc: 'Traditional smooth yam flour swallow prepared soft and served hot with savoury soup.', img: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=600&q=80', badge: 'Traditional Favourite' },
+      { id: 'yam-porridge', name: 'Yam Porridge', category: 'meals', categoryLabel: 'Main Meals', desc: 'Hearty slow-simmered tender yam pottage cooked in savoury seasoned sauce.', img: 'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=600&q=80', badge: 'Comfort Meal' },
+      { id: 'ewa-agoyin', name: 'Ewa Agoyin', category: 'meals', categoryLabel: 'Main Meals', desc: 'Soft slow-cooked mashed beans served with CODE-8 signature spicy Agoyin sauce.', img: 'https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=600&q=80', badge: 'Chef Special' },
+      { id: 'pie', name: 'Pie', category: 'snacks', categoryLabel: 'Snacks', desc: 'Golden-baked flaky pastry stuffed with savoury, seasoned hearty filling.', img: 'https://images.unsplash.com/photo-1562007908-859b4ba9a1a2?auto=format&fit=crop&w=600&q=80', badge: 'Freshly Baked' },
+      { id: 'donut', name: 'Donut', category: 'snacks', categoryLabel: 'Snacks', desc: 'Soft, fluffy golden glazed fried dough ring, perfectly sweet and light.', img: 'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=600&q=80', badge: 'Sweet Delight' },
+      { id: 'popcorn', name: 'Popcorn', category: 'snacks', categoryLabel: 'Snacks', desc: 'Crisp, freshly popped crunchy corn kernels with delicious savoury sweetness.', img: 'https://images.unsplash.com/photo-1578849278619-e73505e9610f?auto=format&fit=crop&w=600&q=80', badge: 'Crunchy Snack' },
+      { id: 'yogurt', name: 'Yogurt', category: 'drinks', categoryLabel: 'Drinks', desc: 'Smooth, rich and chilled creamy sweetened drinking yogurt.', img: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=600&q=80', badge: 'Chilled & Smooth' },
+      { id: 'zobo', name: 'Zobo', category: 'drinks', categoryLabel: 'Drinks', desc: 'Deep ruby-red chilled hibiscus flower drink infused with warming natural spices.', img: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80', badge: 'House Refreshment' }
+    ];
+
+    let order = {}; // { id: quantity }
+    let activeCategory = 'all';
+    let fulfillment = 'pickup';
+
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Render Menu Items
+    function renderMenu() {
+      const grid = document.getElementById('menu-grid');
+      grid.innerHTML = '';
+
+      const items = activeCategory === 'all' 
+        ? MENU_ITEMS 
+        : MENU_ITEMS.filter(i => i.category === activeCategory);
+
+      items.forEach(item => {
+        const qty = order[item.id] || 0;
+        const card = document.createElement('div');
+        card.className = "bg-white rounded-3xl p-5 border border-brand-cream-border shadow-sm flex flex-col justify-between";
+        card.innerHTML = `
+          <div>
+            <div class="relative rounded-2xl overflow-hidden aspect-[4/3] bg-brand-cream-soft mb-3">
+              <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover">
+              <span class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-white/90 text-brand-green">${item.categoryLabel}</span>
+              ${item.badge ? `<span class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-brand-green text-brand-gold-bright">${item.badge}</span>` : ''}
+              ${qty > 0 ? `<div class="absolute bottom-2 left-2 right-2 bg-brand-green text-brand-gold-bright text-xs font-bold px-3 py-1 rounded-lg flex justify-between"><span>In tray</span><span>${qty}x</span></div>` : ''}
+            </div>
+            <h3 class="text-xl font-black text-brand-green">${item.name}</h3>
+            <p class="text-xs text-brand-charcoal-muted mt-1 leading-relaxed">${item.desc}</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-brand-cream-border/70 flex flex-col gap-2">
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-brand-charcoal-muted">Price:</span>
+              <span class="font-bold text-brand-green bg-brand-green-soft px-2 py-0.5 rounded">Confirmed via WhatsApp</span>
+            </div>
+            ${qty === 0 ? `
+              <button onclick="addToOrder('${item.id}')" class="w-full py-2.5 bg-brand-cream-soft hover:bg-brand-green hover:text-brand-gold-bright text-brand-charcoal rounded-xl text-xs font-extrabold uppercase transition-all">
+                + Add to Order
+              </button>
+            ` : `
+              <div class="flex items-center justify-between bg-brand-green text-white rounded-xl p-1">
+                <button onclick="updateQty('${item.id}', -1)" class="w-7 h-7 bg-brand-green-light rounded-lg font-bold text-sm">-</button>
+                <span class="text-xs font-bold text-brand-gold-bright">${qty} in tray</span>
+                <button onclick="updateQty('${item.id}', 1)" class="w-7 h-7 bg-brand-green-light rounded-lg font-bold text-sm">+</button>
+              </div>
+            `}
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      // Teaser Card
+      const teaser = document.createElement('div');
+      teaser.className = "bg-brand-green text-white rounded-3xl p-6 border-2 border-brand-gold/40 flex flex-col justify-between shadow-md";
+      teaser.innerHTML = `
+        <div>
+          <span class="px-2.5 py-0.5 rounded-full bg-brand-gold text-brand-green-dark text-[10px] font-black uppercase">Flyer Promise</span>
+          <h3 class="text-2xl font-black text-brand-gold-bright mt-3 mb-2">And Much More…</h3>
+          <p class="text-xs text-brand-cream-soft/85 leading-relaxed">Ask CODE-8 about our daily specials, proteins, extra sides and custom catering inquiries.</p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-white/10">
+          <a href="https://wa.me/2348069489508?text=Hello%20CODE-8!%20%F0%9F%8D%BD%20I%20would%20like%20to%20ask%20about%20additional%20specials%20(And%20Much%20More...)" target="_blank" class="block w-full py-2.5 text-center bg-brand-gold text-brand-green-dark rounded-xl text-xs font-black uppercase">Ask on WhatsApp</a>
+        </div>
+      `;
+      grid.appendChild(teaser);
+
+      updateBadges();
+    }
+
+    function filterCategory(cat) {
+      activeCategory = cat;
+      document.querySelectorAll('.cat-btn').forEach(b => {
+        if (b.dataset.category === cat) {
+          b.className = "cat-btn active px-4 py-2 rounded-xl text-xs font-bold bg-brand-green text-brand-gold-bright shadow-sm";
+        } else {
+          b.className = "cat-btn px-4 py-2 rounded-xl text-xs font-bold bg-white text-brand-charcoal border border-brand-cream-border";
+        }
+      });
+      renderMenu();
+    }
+
+    function addToOrder(id) {
+      order[id] = (order[id] || 0) + 1;
+      renderMenu();
+      renderCart();
+    }
+
+    function updateQty(id, delta) {
+      order[id] = (order[id] || 0) + delta;
+      if (order[id] <= 0) delete order[id];
+      renderMenu();
+      renderCart();
+    }
+
+    function removeItem(id) {
+      delete order[id];
+      renderMenu();
+      renderCart();
+    }
+
+    function updateBadges() {
+      const count = Object.values(order).reduce((a, b) => a + b, 0);
+      const badge = document.getElementById('header-cart-badge');
+      if (count > 0) {
+        badge.textContent = count;
+        badge.classList.remove('hidden');
+      } else {
+        badge.classList.add('hidden');
+      }
+      document.getElementById('drawer-item-count').textContent = `${count} ${count === 1 ? 'item' : 'items'} selected`;
+    }
+
+    function openCart() {
+      document.getElementById('order-drawer').classList.remove('hidden');
+      renderCart();
+    }
+
+    function closeCart() {
+      document.getElementById('order-drawer').classList.add('hidden');
+    }
+
+    document.getElementById('open-cart-btn').addEventListener('click', openCart);
+    document.getElementById('mobile-toggle').addEventListener('click', () => {
+      document.getElementById('mobile-nav').classList.toggle('hidden');
+    });
+
+    function setFulfillment(type) {
+      fulfillment = type;
+      renderCart();
+    }
+
+    function renderCart() {
+      const list = document.getElementById('drawer-items-list');
+      const footer = document.getElementById('drawer-footer');
+      const ids = Object.keys(order);
+
+      if (ids.length === 0) {
+        list.innerHTML = `
+          <div class="py-12 text-center">
+            <span class="text-4xl block mb-2">🛍️</span>
+            <h4 class="font-black text-brand-green">Your tray is empty</h4>
+            <p class="text-xs text-brand-charcoal-muted mt-1">Browse our menu and select delicious meals or drinks.</p>
+          </div>
+        `;
+        footer.innerHTML = `
+          <button onclick="closeCart()" class="w-full py-2.5 bg-brand-green text-brand-gold-bright rounded-xl text-xs font-bold uppercase">Browse Menu</button>
+        `;
+        return;
+      }
+
+      list.innerHTML = `
+        <div class="p-3 rounded-xl bg-brand-gold-subtle border border-brand-gold/40 text-[11px] text-brand-charcoal">
+          <strong>Direct CODE-8 Confirmation:</strong> Prices and meal availability will be confirmed directly on WhatsApp by CODE-8.
+        </div>
+        <div class="space-y-3 pt-2">
+          ${ids.map(id => {
+            const item = MENU_ITEMS.find(m => m.id === id);
+            const qty = order[id];
+            return `
+              <div class="flex items-center justify-between pb-3 border-b border-brand-cream-border">
+                <div>
+                  <h4 class="text-xs font-bold text-brand-green">${item.name}</h4>
+                  <span class="text-[10px] text-brand-charcoal-muted">${item.categoryLabel}</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <button onclick="updateQty('${id}', -1)" class="w-6 h-6 rounded bg-brand-cream-soft font-bold text-xs">-</button>
+                  <span class="text-xs font-bold px-1">${qty}</span>
+                  <button onclick="updateQty('${id}', 1)" class="w-6 h-6 rounded bg-brand-cream-soft font-bold text-xs">+</button>
+                  <button onclick="removeItem('${id}')" class="text-rose-500 text-xs ml-1">✕</button>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+
+      footer.innerHTML = `
+        <div class="space-y-3">
+          <div>
+            <label class="block text-xs font-bold text-brand-charcoal mb-1">Your Name *</label>
+            <input id="cust-name" type="text" placeholder="e.g. Mary" class="w-full px-3 py-2 rounded-lg border border-brand-cream-border text-xs">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-brand-charcoal mb-1">Fulfillment *</label>
+            <div class="grid grid-cols-2 gap-2">
+              <button type="button" onclick="setFulfillment('pickup')" class="py-2 rounded-lg text-xs font-bold border ${fulfillment === 'pickup' ? 'bg-brand-green text-brand-gold-bright border-brand-green' : 'bg-white border-brand-cream-border'}">Pickup</button>
+              <button type="button" onclick="setFulfillment('delivery')" class="py-2 rounded-lg text-xs font-bold border ${fulfillment === 'delivery' ? 'bg-brand-green text-brand-gold-bright border-brand-green' : 'bg-white border-brand-cream-border'}">Delivery</button>
+            </div>
+          </div>
+          ${fulfillment === 'delivery' ? `
+            <div>
+              <label class="block text-xs font-bold text-brand-charcoal mb-1">Delivery Address *</label>
+              <textarea id="cust-address" rows="2" placeholder="e.g. 15 CMD Road, Magodo, Lagos" class="w-full px-3 py-2 rounded-lg border border-brand-cream-border text-xs"></textarea>
+            </div>
+          ` : ''}
+          <div>
+            <label class="block text-xs font-bold text-brand-charcoal mb-1">Special Notes (Optional)</label>
+            <textarea id="cust-notes" rows="1" placeholder="e.g. Mild pepper, extra sauce" class="w-full px-3 py-2 rounded-lg border border-brand-cream-border text-xs"></textarea>
+          </div>
+          <button onclick="sendOrderWhatsApp()" class="w-full py-3 bg-brand-gold hover:bg-brand-gold-hover text-brand-green-dark rounded-xl text-xs font-black uppercase tracking-wide">
+            💬 Continue on WhatsApp
+          </button>
+          <p class="text-[10px] text-center text-brand-charcoal-muted leading-tight">Your order details will open in WhatsApp with +234 806 948 9508 so you can review and send.</p>
+        </div>
+      `;
+    }
+
+    function sendOrderWhatsApp() {
+      const name = (document.getElementById('cust-name')?.value || '').trim();
+      const notes = (document.getElementById('cust-notes')?.value || '').trim();
+      const addr = (document.getElementById('cust-address')?.value || '').trim();
+
+      if (!name) {
+        alert('Please enter your name.');
+        return;
+      }
+      if (fulfillment === 'delivery' && !addr) {
+        alert('Please enter your delivery address in Lagos.');
+        return;
+      }
+
+      const itemsStr = Object.entries(order).map(([id, qty]) => {
+        const item = MENU_ITEMS.find(m => m.id === id);
+        return `• ${qty}x ${item.name}`;
+      }).join('\n');
+
+      let msg = `*Hello CODE-8!* 🍽️\nI would like to place an order:\n\n*ORDER ITEMS:*\n${itemsStr}\n\n*ORDER DETAILS:*\n• Name: ${name}\n• Fulfillment: ${fulfillment === 'pickup' ? 'Self Pickup (at 8thGear Hub, Magodo)' : 'Doorstep Delivery'}\n`;
+      if (fulfillment === 'delivery') {
+        msg += `• Address: ${addr}\n`;
+      }
+      if (notes) {
+        msg += `• Notes: ${notes}\n`;
+      }
+      msg += `\nPlease confirm availability and total price. Thank you!`;
+
+      const url = `https://wa.me/2348069489508?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank');
+    }
+
+    // Initial load
+    renderMenu();
+  </script>
+</body>
+</html>
