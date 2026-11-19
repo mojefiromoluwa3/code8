@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, MapPin, MessageCircle, ArrowUp } from 'lucide-react';
+import { Phone, MapPin, MessageCircle, ArrowUp, Instagram } from 'lucide-react';
 import { Wordmark } from './Wordmark';
 import { BUSINESS_INFO } from '../data/menuData';
 
@@ -89,7 +89,7 @@ export const Footer: React.FC = () => {
                 </div>
               </div>
 
-              <div className="flex items-center gap-2.5 pt-2">
+              <div className="flex flex-wrap items-center gap-2.5 pt-2">
                 <a
                   href={`https://wa.me/${BUSINESS_INFO.whatsappRaw}`}
                   target="_blank"
@@ -98,6 +98,17 @@ export const Footer: React.FC = () => {
                 >
                   <MessageCircle className="w-3.5 h-3.5 fill-current" />
                   <span>Chat on WhatsApp</span>
+                </a>
+
+                <a
+                  href={BUSINESS_INFO.instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-purple-600 via-pink-600 to-amber-500 hover:opacity-90 text-white text-xs font-bold transition-opacity shadow-sm"
+                  aria-label="Follow CODE-8 on Instagram (@code8go)"
+                >
+                  <Instagram className="w-3.5 h-3.5" />
+                  <span>Instagram</span>
                 </a>
               </div>
             </div>

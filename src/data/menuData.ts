@@ -106,6 +106,8 @@ export const BUSINESS_INFO = {
   phone: '08054493605',
   whatsappRaw: '2348054493605',
   whatsappDisplay: '+234 805 449 3605',
+  instagramUrl: 'https://www.instagram.com/code8go/',
+  instagramHandle: '@code8go',
   address: '8thGear Hub, 41 CMD Road, Magodo Secretariat, Lagos.',
   promises: [
     {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, MessageCircle, MapPin, ExternalLink, Navigation } from 'lucide-react';
+import { Phone, MessageCircle, MapPin, ExternalLink, Navigation, Instagram } from 'lucide-react';
 import { BUSINESS_INFO } from '../data/menuData';
 
 export const ContactLocationSection: React.FC = () => {
@@ -75,6 +75,19 @@ export const ContactLocationSection: React.FC = () => {
                 >
                   <MessageCircle className="w-4 h-4 fill-current" />
                   <span>WhatsApp</span>
+                </a>
+              </div>
+
+              {/* Instagram Button */}
+              <div className="pt-3">
+                <a
+                  href={BUSINESS_INFO.instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r from-purple-600 via-pink-600 to-amber-500 hover:opacity-95 text-white text-xs sm:text-sm font-extrabold tracking-wide uppercase transition-all shadow-md active:scale-98 w-full"
+                >
+                  <Instagram className="w-4 h-4" />
+                  <span>Follow on Instagram (@code8go)</span>
                 </a>
               </div>
             </div>

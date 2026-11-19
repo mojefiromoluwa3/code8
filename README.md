@@ -15,6 +15,7 @@ A modern, responsive, mobile-first single-page frontend application for **CODE-8
 - **Brand Line:** Our Code-Ate.
 - **Service Message:** Pick Up & Delivery
 - **Direct Phone / WhatsApp:** `08054493605` (International click-to-chat: `+2348054493605`)
+- **Official Instagram:** [@code8go](https://www.instagram.com/code8go/) (`https://www.instagram.com/code8go/`)
 - **Official Address:** 8thGear Hub, 41 CMD Road, Magodo Secretariat, Lagos.
 - **Brand Commitments:**
   1. *Fresh Meals Daily*

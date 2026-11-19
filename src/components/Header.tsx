@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ShoppingBag, Menu as MenuIcon, X, Phone } from 'lucide-react';
+import { ShoppingBag, Menu as MenuIcon, X, Phone, Instagram } from 'lucide-react';
 import { Wordmark } from './Wordmark';
 import { BUSINESS_INFO } from '../data/menuData';
 
@@ -118,6 +118,18 @@ export const Header: React.FC<HeaderProps> = ({
               <span>{BUSINESS_INFO.phone}</span>
             </a>
 
+            {/* Instagram Link (Desktop) */}
+            <a
+              href={BUSINESS_INFO.instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden lg:inline-flex items-center justify-center p-2 rounded-xl text-brand-charcoal hover:text-pink-600 hover:bg-pink-50 border border-brand-cream-border transition-colors"
+              title="Follow CODE-8 on Instagram (@code8go)"
+              aria-label="Follow CODE-8 on Instagram (@code8go)"
+            >
+              <Instagram className="w-4 h-4" />
+            </a>
+
             {/* Cart / Order Tray Trigger */}
             <button
               type="button"
@@ -200,6 +212,15 @@ export const Header: React.FC<HeaderProps> = ({
             >
               <Phone className="w-4 h-4 text-brand-green" />
               <span>Call Us: {BUSINESS_INFO.phone}</span>
+            </a>
+            <a
+              href={BUSINESS_INFO.instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 via-pink-600 to-amber-500 text-white text-sm font-bold shadow-sm"
+            >
+              <Instagram className="w-4 h-4" />
+              <span>Follow @code8go on Instagram</span>
             </a>
           </div>
         </div>
