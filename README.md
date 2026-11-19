@@ -14,7 +14,7 @@ A modern, responsive, mobile-first single-page frontend application for **CODE-8
 - **Main Slogan:** Good Food, Great Vibes.
 - **Brand Line:** Our Code-Ate.
 - **Service Message:** Pick Up & Delivery
-- **Direct Phone / WhatsApp:** `08069489508` (International click-to-chat: `+2348069489508`)
+- **Direct Phone / WhatsApp:** `08054493605` (International click-to-chat: `+2348054493605`)
 - **Official Address:** 8thGear Hub, 41 CMD Road, Magodo Secretariat, Lagos.
 - **Brand Commitments:**
   1. *Fresh Meals Daily*
@@ -74,7 +74,7 @@ Simply double-click or open `standalone.html` in any browser.
 |---|---|:---:|---|
 | 1 | Single-page webpage application | ✅ PASS | One continuous single-page web app with smooth anchor navigation. |
 | 2 | Design reflects CODE-8 flyer | ✅ PASS | Deep forest green (`#0e3822`), bright golden yellow (`#eab308`), warm cream (`#faf7f2`), dark charcoal text. |
-| 3 | Brand wording & business details accurate | ✅ PASS | Phone `08069489508`, Address `8thGear Hub, 41 CMD Road, Magodo Secretariat, Lagos.` |
+| 3 | Brand wording & business details accurate | ✅ PASS | Phone `08054493605`, Address `8thGear Hub, 41 CMD Road, Magodo Secretariat, Lagos.` |
 | 4 | Every menu item present | ✅ PASS | All 9 flyer items + "And Much More…" teaser included. |
 | 5 | No invented prices or claims | ✅ PASS | Explicitly noted as "Confirmed via WhatsApp"; no fabricated prices or medical claims. |
 | 6 | Working page navigation | ✅ PASS | Sticky header links scroll smoothly to Home, Menu, About, Pickup & Delivery, Contact. |
@@ -82,8 +82,8 @@ Simply double-click or open `standalone.html` in any browser.
 | 8 | Order summary panel | ✅ PASS | Order tray slide-over drawer shows item count, live quantities, and details. |
 | 9 | Pickup & delivery selection | ✅ PASS | Toggle buttons between Self Pickup and Doorstep Delivery. |
 | 10| Delivery address requested | ✅ PASS | Delivery address input appears and is validated when delivery is chosen. |
-| 11| Formatted WhatsApp draft message | ✅ PASS | Compiles formatted order and opens `https://wa.me/2348069489508?text=...` |
-| 12| Working telephone link | ✅ PASS | `tel:08069489508` opens phone dialer. |
+| 11| Formatted WhatsApp draft message | ✅ PASS | Compiles formatted order and opens `https://wa.me/2348054493605?text=...` |
+| 12| Working telephone link | ✅ PASS | `tel:08054493605` opens phone dialer. |
 | 13| Responsive & Accessible | ✅ PASS | Mobile hamburger menu, mobile floating tray bar, keyboard focus, semantic HTML. |
 | 14| Frontend-only scope | ✅ PASS | 100% client-side state; no backend, DB, admin dashboard, or real payment processor. |
 | 15| Honest order fulfillment flow | ✅ PASS | Clearly informs the user they review and send the pre-filled message themselves in WhatsApp. |

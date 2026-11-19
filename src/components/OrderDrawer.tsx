@@ -406,7 +406,7 @@ export const OrderDrawer: React.FC<OrderDrawerProps> = ({
               </button>
 
               <p className="text-[10.5px] text-center text-brand-charcoal-muted leading-tight">
-                Tapping &ldquo;Continue on WhatsApp&rdquo; will open your WhatsApp app or web with your pre-filled order for <strong>+234 806 948 9508</strong>. You will review and send the message yourself.
+                Tapping &ldquo;Continue on WhatsApp&rdquo; will open your WhatsApp app or web with your pre-filled order for <strong>{BUSINESS_INFO.whatsappDisplay}</strong>. You will review and send the message yourself.
               </p>
             </div>
           )}

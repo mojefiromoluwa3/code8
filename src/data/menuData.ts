@@ -103,9 +103,9 @@ export const BUSINESS_INFO = {
   slogan: 'Good Food, Great Vibes.',
   brandLine: 'Our Code-Ate.',
   serviceMessage: 'Pick Up & Delivery',
-  phone: '08069489508',
-  whatsappRaw: '2348069489508',
-  whatsappDisplay: '+234 806 948 9508',
+  phone: '08054493605',
+  whatsappRaw: '2348054493605',
+  whatsappDisplay: '+234 805 449 3605',
   address: '8thGear Hub, 41 CMD Road, Magodo Secretariat, Lagos.',
   promises: [
     {
