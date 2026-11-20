@@ -19,21 +19,25 @@ import { BUSINESS_INFO, FALLBACK_FOOD_IMAGE } from '../data/menuData';
 interface OrderDrawerProps {
   isOpen: boolean;
   onClose: () => void;
+  onBrowseMenu: () => void;
   orderItems: OrderItem[];
   onUpdateQuantity: (itemId: string, delta: number) => void;
   onRemoveItem: (itemId: string) => void;
   onClearOrder: () => void;
   onShowToast: (message: string, type?: 'success' | 'info') => void;
+  onSelectSoup?: (itemId: string, soup: string) => void;
 }
 
 export const OrderDrawer: React.FC<OrderDrawerProps> = ({
   isOpen,
   onClose,
+  onBrowseMenu,
   orderItems,
   onUpdateQuantity,
   onRemoveItem,
   onClearOrder,
   onShowToast,
+  onSelectSoup,
 }) => {
   const [customerName, setCustomerName] = useState('');
   const [orderType, setOrderType] = useState<OrderType>('pickup');
@@ -69,7 +73,10 @@ export const OrderDrawer: React.FC<OrderDrawerProps> = ({
   // Compile formatted WhatsApp message
   const compileOrderMessage = () => {
     const itemsList = orderItems
-      .map((oi) => `  • ${oi.quantity}x ${oi.item.name} (${oi.item.categoryLabel})`)
+      .map((oi) => {
+        const soupDetail = oi.selectedSoup ? ` [Choice of Soup: ${oi.selectedSoup}]` : '';
+        return `  • ${oi.quantity}x ${oi.item.name}${soupDetail} (${oi.item.categoryLabel})`;
+      })
       .join('\n');
 
     let msg = `*Hello CODE-8!* 🍽️\n`;
@@ -84,7 +91,7 @@ export const OrderDrawer: React.FC<OrderDrawerProps> = ({
     }
 
     if (specialNotes.trim()) {
-      msg += `• *Special Notes / Requests:* ${specialNotes.trim()}\n`;
+      msg += `• *Special Notes & Food Allergies:* ${specialNotes.trim()}\n`;
     }
 
     msg += `\n_Please confirm availability and the total price for this order. Thank you!_`;
@@ -93,7 +100,7 @@ export const OrderDrawer: React.FC<OrderDrawerProps> = ({
 
   const handleContinueOnWhatsApp = () => {
     if (orderItems.length === 0) {
-      onShowToast('Please add at least one meal, snack, or drink to your order.', 'info');
+      onShowToast('Please add at least one meal, protein, snack, or drink to your order.', 'info');
       return;
     }
 
@@ -182,12 +189,12 @@ export const OrderDrawer: React.FC<OrderDrawerProps> = ({
                   Your tray is empty
                 </h3>
                 <p className="text-xs sm:text-sm text-brand-charcoal-muted max-w-xs mb-6">
-                  Explore our menu to add authentic Jollof rice, Amala, golden pastries, snacks, or refreshing drinks!
+                  Explore our menu to add authentic Jollof rice, Amala with soup, succulent proteins, snacks, or refreshing drinks!
                 </p>
                 <button
                   type="button"
-                  onClick={onClose}
-                  className="px-5 py-2.5 rounded-xl bg-brand-green text-brand-gold-bright text-xs font-extrabold uppercase tracking-wide hover:bg-brand-green-light shadow-soft-sm transition-all"
+                  onClick={onBrowseMenu}
+                  className="px-5 py-2.5 rounded-xl bg-brand-green text-brand-gold-bright text-xs font-extrabold uppercase tracking-wide hover:bg-brand-green-light shadow-soft-sm transition-all cursor-pointer"
                 >
                   Browse Menu Items
                 </button>
@@ -209,54 +216,74 @@ export const OrderDrawer: React.FC<OrderDrawerProps> = ({
                   </span>
 
                   <div className="divide-y divide-brand-cream-border/60">
-                    {orderItems.map(({ item, quantity }) => (
-                      <div key={item.id} className="py-3 flex items-center justify-between gap-3">
-                        <div className="flex items-center gap-3 min-w-0">
-                          <img
-                            src={item.image}
-                            alt={item.name}
-                            className="w-12 h-12 rounded-xl object-cover bg-brand-cream-soft shrink-0"
-                            onError={(e) => { e.currentTarget.src = FALLBACK_FOOD_IMAGE; }}
-                          />
-                          <div className="min-w-0">
-                            <h4 className="text-sm font-bold text-brand-green truncate">{item.name}</h4>
-                            <span className="text-[11px] font-semibold text-brand-charcoal-muted">{item.categoryLabel}</span>
+                    {orderItems.map(({ item, quantity, selectedSoup }) => (
+                      <div key={item.id} className="py-3 flex flex-col gap-2">
+                        <div className="flex items-center justify-between gap-3">
+                          <div className="flex items-center gap-3 min-w-0">
+                            <img
+                              src={item.image}
+                              alt={item.name}
+                              className="w-12 h-12 rounded-xl object-cover bg-brand-cream-soft shrink-0"
+                              onError={(e) => { e.currentTarget.src = FALLBACK_FOOD_IMAGE; }}
+                            />
+                            <div className="min-w-0">
+                              <h4 className="text-sm font-bold text-brand-green truncate">{item.name}</h4>
+                              <span className="text-[11px] font-semibold text-brand-charcoal-muted">{item.categoryLabel}</span>
+                            </div>
+                          </div>
+
+                          {/* Stepper & Delete */}
+                          <div className="flex items-center gap-1.5 shrink-0">
+                            <button
+                              type="button"
+                              onClick={() => onUpdateQuantity(item.id, -1)}
+                              className="p-1.5 rounded-lg bg-brand-cream-soft hover:bg-brand-cream-border text-brand-charcoal transition-colors"
+                              aria-label={`Decrease ${item.name}`}
+                            >
+                              <Minus className="w-3.5 h-3.5" />
+                            </button>
+
+                            <span className="w-7 text-center font-extrabold text-xs text-brand-charcoal">
+                              {quantity}
+                            </span>
+
+                            <button
+                              type="button"
+                              onClick={() => onUpdateQuantity(item.id, 1)}
+                              className="p-1.5 rounded-lg bg-brand-cream-soft hover:bg-brand-cream-border text-brand-charcoal transition-colors"
+                              aria-label={`Increase ${item.name}`}
+                            >
+                              <Plus className="w-3.5 h-3.5" />
+                            </button>
+
+                            <button
+                              type="button"
+                              onClick={() => onRemoveItem(item.id)}
+                              className="p-1.5 ml-1 rounded-lg text-rose-500 hover:bg-rose-50 transition-colors"
+                              aria-label={`Remove ${item.name}`}
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
                           </div>
                         </div>
 
-                        {/* Stepper & Delete */}
-                        <div className="flex items-center gap-1.5 shrink-0">
-                          <button
-                            type="button"
-                            onClick={() => onUpdateQuantity(item.id, -1)}
-                            className="p-1.5 rounded-lg bg-brand-cream-soft hover:bg-brand-cream-border text-brand-charcoal transition-colors"
-                            aria-label={`Decrease ${item.name}`}
-                          >
-                            <Minus className="w-3.5 h-3.5" />
-                          </button>
-
-                          <span className="w-7 text-center font-extrabold text-xs text-brand-charcoal">
-                            {quantity}
-                          </span>
-
-                          <button
-                            type="button"
-                            onClick={() => onUpdateQuantity(item.id, 1)}
-                            className="p-1.5 rounded-lg bg-brand-cream-soft hover:bg-brand-cream-border text-brand-charcoal transition-colors"
-                            aria-label={`Increase ${item.name}`}
-                          >
-                            <Plus className="w-3.5 h-3.5" />
-                          </button>
-
-                          <button
-                            type="button"
-                            onClick={() => onRemoveItem(item.id)}
-                            className="p-1.5 ml-1 rounded-lg text-rose-500 hover:bg-rose-50 transition-colors"
-                            aria-label={`Remove ${item.name}`}
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
-                        </div>
+                        {/* If Swallow Meal: Display & Allow Changing Selected Soup */}
+                        {item.isSwallow && item.soupOptions && (
+                          <div className="ml-15 pl-1 flex items-center gap-2 bg-brand-cream-soft/90 px-2.5 py-1.5 rounded-lg border border-brand-cream-border">
+                            <span className="text-[10.5px] font-extrabold text-brand-green shrink-0">Soup:</span>
+                            <select
+                              value={selectedSoup || item.soupOptions[0]}
+                              onChange={(e) => onSelectSoup?.(item.id, e.target.value)}
+                              className="text-[11px] font-bold bg-white text-brand-charcoal border border-brand-cream-border rounded-md px-2 py-0.5 w-full focus:ring-1 focus:ring-brand-gold outline-none cursor-pointer"
+                            >
+                              {item.soupOptions.map((soup) => (
+                                <option key={soup} value={soup}>
+                                  {soup}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -359,21 +386,21 @@ export const OrderDrawer: React.FC<OrderDrawerProps> = ({
                     </div>
                   )}
 
-                  {/* Special Requests / Notes */}
+                  {/* Special Requests, Allergies & Notes */}
                   <div>
                     <label htmlFor={notesInputId} className="block text-xs font-bold text-brand-charcoal mb-1">
-                      Special Requests / Notes <span className="text-brand-charcoal-muted font-normal">(Optional)</span>
+                      Special Requests, Allergies & Notes <span className="text-brand-charcoal-muted font-normal">(Optional)</span>
                     </label>
                     <textarea
                       id={notesInputId}
                       rows={2}
-                      placeholder="e.g. Mild pepper, extra napkins, specific packing instructions..."
+                      placeholder="e.g. Food allergies (peanuts, nuts, seafood, etc.), mild pepper, extra sauce, packing instructions..."
                       value={specialNotes}
                       onChange={(e) => setSpecialNotes(e.target.value)}
                       className="w-full px-3.5 py-2 rounded-xl border border-brand-cream-border bg-brand-cream/40 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-gold resize-none"
                     />
                     <p className="text-[10px] text-brand-charcoal-muted mt-1 italic">
-                      * Special notes and meal customizations must be confirmed by CODE-8 based on daily kitchen preparation.
+                      * Please list any food allergies or specific preparation requests so CODE-8 kitchen can accommodate safely.
                     </p>
                   </div>
                 </div>
@@ -389,7 +416,7 @@ export const OrderDrawer: React.FC<OrderDrawerProps> = ({
               <button
                 type="button"
                 onClick={handleContinueOnWhatsApp}
-                className="w-full flex items-center justify-center gap-2.5 py-3.5 px-4 rounded-xl bg-brand-gold hover:bg-brand-gold-hover text-brand-green-dark text-sm font-black tracking-wide uppercase shadow-glow-gold transition-all duration-200 active:scale-98 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green"
+                className="w-full flex items-center justify-center gap-2.5 py-3.5 px-4 rounded-xl bg-brand-gold hover:bg-brand-gold-hover text-brand-green-dark text-sm font-black tracking-wide uppercase shadow-glow-gold transition-all duration-200 active:scale-98 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green cursor-pointer"
               >
                 <MessageCircle className="w-5 h-5 fill-current" />
                 <span>Continue on WhatsApp</span>
@@ -399,7 +426,7 @@ export const OrderDrawer: React.FC<OrderDrawerProps> = ({
               <button
                 type="button"
                 onClick={handleCopyOrder}
-                className="w-full flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-white hover:bg-brand-cream-soft text-brand-charcoal text-xs font-bold border border-brand-cream-border transition-colors"
+                className="w-full flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-white hover:bg-brand-cream-soft text-brand-charcoal text-xs font-bold border border-brand-cream-border transition-colors cursor-pointer"
               >
                 {copied ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4 text-brand-charcoal-muted" />}
                 <span>{copied ? 'Copied to Clipboard!' : 'Copy Order Summary Text'}</span>

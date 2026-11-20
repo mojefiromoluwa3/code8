@@ -6,17 +6,21 @@ import { FALLBACK_FOOD_IMAGE } from '../data/menuData';
 interface MenuItemCardProps {
   item: MenuItem;
   currentQuantity: number;
+  selectedSoup?: string;
   onAddToCart: (item: MenuItem) => void;
   onUpdateQuantity: (itemId: string, delta: number) => void;
   onRemove: (itemId: string) => void;
+  onSelectSoup?: (itemId: string, soup: string) => void;
 }
 
 export const MenuItemCard: React.FC<MenuItemCardProps> = ({
   item,
   currentQuantity,
+  selectedSoup,
   onAddToCart,
   onUpdateQuantity,
   onRemove,
+  onSelectSoup,
 }) => {
   const [imgError, setImgError] = useState(false);
   const isSelected = currentQuantity > 0;
@@ -69,7 +73,7 @@ export const MenuItemCard: React.FC<MenuItemCardProps> = ({
         </div>
 
         {/* Title & Description */}
-        <div className="space-y-1.5 mb-4">
+        <div className="space-y-1.5 mb-3">
           <h3 className="text-xl font-black text-brand-green tracking-tight group-hover:text-brand-green-light transition-colors">
             {item.name}
           </h3>
@@ -77,6 +81,26 @@ export const MenuItemCard: React.FC<MenuItemCardProps> = ({
             {item.description}
           </p>
         </div>
+
+        {/* Swallow Soup Options Selector */}
+        {item.isSwallow && item.soupOptions && (
+          <div className="mb-3 bg-brand-cream-soft/80 p-2.5 rounded-2xl border border-brand-cream-border">
+            <label className="block text-[11px] font-extrabold text-brand-green uppercase tracking-wide mb-1 flex items-center gap-1">
+              <span>🥣</span> Choice of Soup:
+            </label>
+            <select
+              value={selectedSoup || item.soupOptions[0]}
+              onChange={(e) => onSelectSoup?.(item.id, e.target.value)}
+              className="w-full text-xs font-bold bg-white text-brand-charcoal border border-brand-cream-border rounded-xl py-2 px-2.5 focus:ring-2 focus:ring-brand-gold outline-none cursor-pointer"
+            >
+              {item.soupOptions.map((soup) => (
+                <option key={soup} value={soup}>
+                  {soup}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
       </div>
 
       {/* Bottom Section: Price note & Action Button / Stepper */}

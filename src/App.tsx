@@ -14,6 +14,7 @@ import { ShoppingBag, ArrowRight } from 'lucide-react';
 
 export function App() {
   const [orderQuantities, setOrderQuantities] = useState<Record<string, number>>({});
+  const [selectedSoups, setSelectedSoups] = useState<Record<string, string>>({});
   const [isOrderDrawerOpen, setIsOrderDrawerOpen] = useState(false);
   const [toasts, setToasts] = useState<ToastNotification[]>([]);
 
@@ -28,9 +29,15 @@ export function App() {
       .filter(([_, qty]) => qty > 0)
       .map(([id, qty]) => {
         const item = MENU_ITEMS.find((m) => m.id === id)!;
-        return { item, quantity: qty };
+        return { 
+          item, 
+          quantity: qty,
+          selectedSoup: item.isSwallow 
+            ? (selectedSoups[id] || item.soupOptions?.[0] || 'Gbegiri & Ewedu (Abula)') 
+            : undefined
+        };
       });
-  }, [orderQuantities]);
+  }, [orderQuantities, selectedSoups]);
 
   const showToast = (message: string, type: 'success' | 'info' = 'success') => {
     const id = Date.now().toString();
@@ -44,11 +51,29 @@ export function App() {
     setToasts((prev) => prev.filter((t) => t.id !== id));
   };
 
+  const handleSelectSoup = (itemId: string, soup: string) => {
+    setSelectedSoups((prev) => ({
+      ...prev,
+      [itemId]: soup
+    }));
+    const item = MENU_ITEMS.find((m) => m.id === itemId);
+    if (item) {
+      showToast(`Selected ${soup} for ${item.name}`);
+    }
+  };
+
   const handleAddToCart = (item: MenuItem) => {
     setOrderQuantities((prev) => ({
       ...prev,
       [item.id]: (prev[item.id] || 0) + 1,
     }));
+    // Default soup if not chosen yet for swallow
+    if (item.isSwallow && !selectedSoups[item.id] && item.soupOptions?.length) {
+      setSelectedSoups((prev) => ({
+        ...prev,
+        [item.id]: item.soupOptions![0]
+      }));
+    }
     showToast(`Added ${item.name} to your order tray!`);
   };
 
@@ -89,6 +114,11 @@ export function App() {
     }
   };
 
+  const handleBrowseMenu = () => {
+    setIsOrderDrawerOpen(false);
+    handleExploreMenu();
+  };
+
   const handleOrderNowClick = () => {
     if (totalItemCount === 0) {
       handleExploreMenu();
@@ -117,9 +147,11 @@ export function App() {
         {/* 3. Menu Section */}
         <MenuSection
           orderQuantities={orderQuantities}
+          selectedSoups={selectedSoups}
           onAddToCart={handleAddToCart}
           onUpdateQuantity={handleUpdateQuantity}
           onRemove={handleRemoveItem}
+          onSelectSoup={handleSelectSoup}
           onOpenOrder={() => setIsOrderDrawerOpen(true)}
         />
 
@@ -142,11 +174,13 @@ export function App() {
       <OrderDrawer
         isOpen={isOrderDrawerOpen}
         onClose={() => setIsOrderDrawerOpen(false)}
+        onBrowseMenu={handleBrowseMenu}
         orderItems={orderItems}
         onUpdateQuantity={handleUpdateQuantity}
         onRemoveItem={handleRemoveItem}
         onClearOrder={handleClearOrder}
         onShowToast={showToast}
+        onSelectSoup={handleSelectSoup}
       />
 
       {/* Floating Order Bar on Mobile when items are in tray */}

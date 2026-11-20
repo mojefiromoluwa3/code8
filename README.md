@@ -28,18 +28,28 @@ A modern, responsive, mobile-first single-page frontend application for **CODE-8
 
 ### Main Meals
 1. **Jollof Rice** — Classic party-style seasoned rice prepared fresh with rich aromatic savoury spices.
-2. **Amala** — Traditional smooth yam flour swallow prepared soft and served hot with savoury soup.
-3. **Yam Porridge** — Hearty slow-simmered tender yam pottage cooked in savoury seasoned sauce.
-4. **Ewa Agoyin** — Soft slow-cooked mashed beans served with CODE-8 signature spicy Agoyin sauce.
+2. **Amala** — Traditional smooth yam flour swallow prepared soft and served hot with choice of soup (Gbegiri & Ewedu Abula, Egusi, Ogbono, Efo Riro, Okro).
+3. **Yam Porridge** — Hearty slow-simmered tender yam pottage (Asaro) cooked in savoury seasoned palm oil sauce.
+4. **Ewa Agoyin** — Soft slow-cooked mashed beans served with CODE-8 signature spicy, smoky Agoyin sauce.
+
+### Proteins & Sides
+5. **Fried Chicken** — Crispy, golden seasoned Nigerian fried chicken.
+6. **Cooked Beef** — Tender chunks of seasoned, spiced and lightly fried beef.
+7. **Turkey** — Generous cut of seasoned peppered fried turkey.
+8. **Fish** — Crispy fried whole fish seasoned with local spices.
+9. **Goat Meat** — Tender, spicy peppered goat meat (Asun style).
+10. **Fried Plantain (Dodo)** — Sweet golden-fried ripe plantain slices.
+11. **Coleslaw** — Fresh and crunchy cabbage and carrot salad tossed in creamy dressing.
 
 ### Snacks
-5. **Pie** — Golden-baked flaky pastry stuffed with savoury, seasoned hearty filling.
-6. **Donut** — Soft, fluffy golden glazed fried dough ring, perfectly sweet and light.
-7. **Popcorn** — Crisp, freshly popped crunchy corn kernels with delicious savoury sweetness.
+12. **Pie** — Golden-baked flaky pastry stuffed with savoury, seasoned minced meat filling.
+13. **Donut** — Soft, fluffy golden glazed fried dough ring, perfectly sweet and light.
+14. **Popcorn** — Crisp, freshly popped crunchy corn kernels with delicious savoury sweetness.
 
 ### Drinks
-8. **Yogurt** — Smooth, rich and chilled creamy sweetened drinking yogurt.
-9. **Zobo** — Deep ruby-red chilled hibiscus flower drink infused with warming natural spices.
+15. **Yogurt (Bottled)** — Smooth, rich and chilled creamy sweetened drinking yogurt in a bottle.
+16. **Zobo Drink (Bottled)** — Deep ruby-red chilled hibiscus flower drink in bottle infused with warming natural spices and citrus.
+17. **Kunnu Drink (Bottled)** — Traditional spiced creamy tiger nut and millet drink in a chilled bottle, refreshing and naturally nourishing.
 
 ### Special Addition
 - **And Much More…** — Preserves the promotional flyer promise for daily specials and inquiry on WhatsApp.

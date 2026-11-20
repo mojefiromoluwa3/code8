@@ -4,12 +4,12 @@ export const MENU_ITEMS: MenuItem[] = [
   // Main Meals
   {
     id: 'jollof-rice',
-    name: 'Jollof Rice',
+    name: 'Jollof Party Rice',
     category: 'meals',
     categoryLabel: 'Main Meals',
-    description: 'Classic party-style seasoned rice prepared fresh with rich aromatic savoury spices.',
-    image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80',
-    imageAlt: 'Flavourful seasoned Nigerian Jollof Rice',
+    description: 'Classic smoky party-style seasoned rice prepared fresh with rich aromatic savoury spices and pepper base.',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Smoky_Jollof_Rice.jpg',
+    imageAlt: 'Authentic Nigerian Smoky Party Jollof Rice ready to serve',
     badge: 'Popular Choice'
   },
   {
@@ -17,19 +17,28 @@ export const MENU_ITEMS: MenuItem[] = [
     name: 'Amala',
     category: 'meals',
     categoryLabel: 'Main Meals',
-    description: 'Traditional smooth yam flour swallow prepared soft and served hot with savoury soup.',
-    image: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=800&q=80',
-    imageAlt: 'Traditional piping hot Amala swallow meal',
-    badge: 'Traditional Favourite'
+    description: 'Traditional smooth yam flour swallow prepared soft and served hot with your choice of traditional soup.',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Amala_and_Abula.jpg',
+    imageAlt: 'Traditional piping hot Amala swallow meal with Abula',
+    badge: 'Traditional Favourite',
+    isSwallow: true,
+    soupOptions: [
+      'Gbegiri & Ewedu (Abula)',
+      'Ewedu Only',
+      'Egusi Soup',
+      'Ogbono Soup',
+      'Efo Riro (Vegetable)',
+      'Okro Soup'
+    ]
   },
   {
     id: 'yam-porridge',
-    name: 'Yam Porridge',
+    name: 'Yam Porridge (Asaro)',
     category: 'meals',
     categoryLabel: 'Main Meals',
-    description: 'Hearty slow-simmered tender yam pottage cooked in savoury seasoned sauce.',
-    image: 'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80',
-    imageAlt: 'Rich slow-simmered Yam Porridge',
+    description: 'Hearty slow-simmered tender yam pottage (Asaro) cooked in savoury seasoned palm oil and peppers.',
+    image: './images/yam-porridge.jpg',
+    imageAlt: 'Freshly prepared authentic Nigerian Yam Porridge Asaro with tender yam chunks in rich palm oil sauce',
     badge: 'Comfort Meal'
   },
   {
@@ -37,21 +46,93 @@ export const MENU_ITEMS: MenuItem[] = [
     name: 'Ewa Agoyin',
     category: 'meals',
     categoryLabel: 'Main Meals',
-    description: 'Soft slow-cooked mashed beans served with CODE-8 signature spicy Agoyin sauce.',
-    image: 'https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=800&q=80',
-    imageAlt: 'Slow-cooked Ewa Agoyin beans with rich sauce',
+    description: 'Soft slow-cooked mashed beans served with CODE-8 signature spicy, smoky Agoyin sauce.',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ewa_agoyin.jpg',
+    imageAlt: 'Slow-cooked Ewa Agoyin beans with rich dark sauce',
     badge: 'Chef Special'
+  },
+
+  // Proteins & Sides
+  {
+    id: 'fried-chicken',
+    name: 'Fried Chicken',
+    category: 'proteins',
+    categoryLabel: 'Proteins & Sides',
+    description: 'Crispy, golden-brown seasoned Nigerian fried chicken, tender, juicy and deeply flavourful.',
+    image: 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=800&q=80',
+    imageAlt: 'Crispy golden-brown Nigerian seasoned fried chicken',
+    badge: 'Top Protein'
+  },
+  {
+    id: 'cooked-beef',
+    name: 'Cooked & Fried Beef',
+    category: 'proteins',
+    categoryLabel: 'Proteins & Sides',
+    description: 'Succulent chunks of seasoned Nigerian beef, simmered in rich spices and tossed in savoury peppered sauce.',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Food_flask_of_peppered_beef.jpg',
+    imageAlt: 'Tender seasoned cooked and peppered Nigerian beef chunks',
+    badge: 'Tender & Savoury'
+  },
+  {
+    id: 'turkey',
+    name: 'Fried Turkey',
+    category: 'proteins',
+    categoryLabel: 'Proteins & Sides',
+    description: 'Generous portion of well-seasoned Nigerian fried turkey, golden-crisped with rich aromatic flavour.',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Fried_Turkey.jpg',
+    imageAlt: 'Seasoned golden Nigerian fried turkey wings and cut',
+    badge: 'Customer Favourite'
+  },
+  {
+    id: 'fish',
+    name: 'Fried / Roasted Fish',
+    category: 'proteins',
+    categoryLabel: 'Proteins & Sides',
+    description: 'Crispy fried and flame-roasted fish, seasoned to perfection with aromatic local peppers, herbs and spices.',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Freshly_Roasted_Obokun_fish.jpg',
+    imageAlt: 'Freshly roasted seasoned Nigerian Obokun fish',
+    badge: 'Fresh Catch'
+  },
+  {
+    id: 'goat-meat',
+    name: 'Goat Meat (Asun)',
+    category: 'proteins',
+    categoryLabel: 'Proteins & Sides',
+    description: 'Tender, spicy Nigerian peppered goat meat (Asun style) cut into savoury, fiery bite-sized portions.',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Goat_meat_Asun.jpg',
+    imageAlt: 'Spicy peppered Nigerian goat meat Asun',
+    badge: 'Spicy Special'
+  },
+  {
+    id: 'fried-plantain',
+    name: 'Fried Plantain (Dodo)',
+    category: 'proteins',
+    categoryLabel: 'Proteins & Sides',
+    description: 'Sweet, caramelized golden-fried ripe plantain slices, the essential companion to every meal.',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Dodo_(Plantain).jpg',
+    imageAlt: 'Sweet golden fried ripe plantain slices Dodo',
+    badge: 'Sweet & Golden'
+  },
+  {
+    id: 'coleslaw',
+    name: 'Coleslaw',
+    category: 'proteins',
+    categoryLabel: 'Proteins & Sides',
+    description: 'Fresh and crunchy cabbage and carrot salad tossed in creamy dressing.',
+    image: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80',
+    imageAlt: 'Fresh creamy coleslaw salad',
+    badge: 'Fresh Salad'
   },
 
   // Snacks
   {
     id: 'pie',
-    name: 'Pie',
+    name: 'Meat Pie',
     category: 'snacks',
     categoryLabel: 'Snacks',
-    description: 'Golden-baked flaky pastry stuffed with savoury, seasoned hearty filling.',
-    image: 'https://images.unsplash.com/photo-1562007908-859b4ba9a1a2?auto=format&fit=crop&w=800&q=80',
-    imageAlt: 'Freshly baked golden meat pie',
+    description: 'Golden-baked flaky pastry stuffed with savoury, seasoned hearty minced meat and potato filling.',
+    image: './images/meat-pie.jpg',
+    imageAlt: 'Freshly baked Nigerian meat pie with golden flaky crust and savory minced beef filling',
     badge: 'Freshly Baked'
   },
   {
@@ -59,9 +140,9 @@ export const MENU_ITEMS: MenuItem[] = [
     name: 'Donut',
     category: 'snacks',
     categoryLabel: 'Snacks',
-    description: 'Soft, fluffy golden glazed fried dough ring, perfectly sweet and light.',
-    image: 'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80',
-    imageAlt: 'Golden fluffy glazed donut snack',
+    description: 'Soft, fluffy golden glazed fried dough ring, perfectly sweet, light and freshly made.',
+    image: './images/donut.jpg',
+    imageAlt: 'Freshly made golden bakery donuts with glaze, sugar coating and chocolate topping',
     badge: 'Sweet Delight'
   },
   {
@@ -78,23 +159,33 @@ export const MENU_ITEMS: MenuItem[] = [
   // Drinks
   {
     id: 'yogurt',
-    name: 'Yogurt',
+    name: 'Yogurt (Bottled)',
     category: 'drinks',
     categoryLabel: 'Drinks',
-    description: 'Smooth, rich and chilled creamy sweetened drinking yogurt.',
-    image: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=800&q=80',
-    imageAlt: 'Chilled creamy yogurt drink',
+    description: 'Smooth, rich and chilled creamy sweetened drinking yogurt in a bottle.',
+    image: './images/yogurt.jpg',
+    imageAlt: 'Fresh chilled creamy yoghurt in transparent sealed beverage bottle with condensation',
     badge: 'Chilled & Smooth'
   },
   {
     id: 'zobo',
-    name: 'Zobo',
+    name: 'Zobo Drink (Bottled)',
     category: 'drinks',
     categoryLabel: 'Drinks',
-    description: 'Deep ruby-red chilled hibiscus flower drink infused with warming natural spices.',
-    image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80',
-    imageAlt: 'Chilled vibrant spiced Zobo hibiscus drink',
+    description: 'Deep ruby-red chilled hibiscus flower drink in bottle, naturally brewed with warming ginger, cloves and citrus.',
+    image: './images/zobo.jpg',
+    imageAlt: 'Freshly prepared chilled Nigerian Zobo drink in transparent sealed PET bottle with condensation',
     badge: 'House Refreshment'
+  },
+  {
+    id: 'kunnu',
+    name: 'Kunnu Drink (Bottled)',
+    category: 'drinks',
+    categoryLabel: 'Drinks',
+    description: 'Traditional spiced creamy tiger nut and millet drink in a chilled bottle, refreshing, smooth and naturally nourishing.',
+    image: './images/kunu.jpg',
+    imageAlt: 'Traditional chilled Nigerian Kunu drink in transparent sealed PET bottle',
+    badge: 'Traditional Cooler'
   }
 ];
 
@@ -116,7 +207,7 @@ export const BUSINESS_INFO = {
     },
     {
       title: 'Affordable & Pocket Friendly Meals',
-      description: 'Generous, satisfying Nigerian meals and snacks priced with your daily comfort and budget in mind.'
+      description: 'Generous, satisfying Nigerian meals, proteins, and snacks priced with your daily comfort and budget in mind.'
     },
     {
       title: 'Quality Food Always',

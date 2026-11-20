@@ -1,22 +1,26 @@
 import React, { useState } from 'react';
-import { Sparkles, MessageCircle, Utensils, Coffee, Cookie, Layers } from 'lucide-react';
+import { Sparkles, MessageCircle, Utensils, Coffee, Cookie, Layers, Flame } from 'lucide-react';
 import { MenuItem, MenuCategory } from '../types';
 import { MENU_ITEMS, BUSINESS_INFO } from '../data/menuData';
 import { MenuItemCard } from './MenuItemCard';
 
 interface MenuSectionProps {
   orderQuantities: Record<string, number>;
+  selectedSoups?: Record<string, string>;
   onAddToCart: (item: MenuItem) => void;
   onUpdateQuantity: (itemId: string, delta: number) => void;
   onRemove: (itemId: string) => void;
+  onSelectSoup?: (itemId: string, soup: string) => void;
   onOpenOrder: () => void;
 }
 
 export const MenuSection: React.FC<MenuSectionProps> = ({
   orderQuantities,
+  selectedSoups,
   onAddToCart,
   onUpdateQuantity,
   onRemove,
+  onSelectSoup,
   onOpenOrder,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<MenuCategory>('all');
@@ -24,6 +28,7 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
   const categories: { id: MenuCategory; label: string; icon: React.ReactNode; count: number }[] = [
     { id: 'all', label: 'All Items', icon: <Layers className="w-4 h-4" />, count: MENU_ITEMS.length },
     { id: 'meals', label: 'Main Meals', icon: <Utensils className="w-4 h-4" />, count: MENU_ITEMS.filter(i => i.category === 'meals').length },
+    { id: 'proteins', label: 'Proteins & Sides', icon: <Flame className="w-4 h-4" />, count: MENU_ITEMS.filter(i => i.category === 'proteins').length },
     { id: 'snacks', label: 'Snacks', icon: <Cookie className="w-4 h-4" />, count: MENU_ITEMS.filter(i => i.category === 'snacks').length },
     { id: 'drinks', label: 'Drinks', icon: <Coffee className="w-4 h-4" />, count: MENU_ITEMS.filter(i => i.category === 'drinks').length },
   ];
@@ -33,7 +38,7 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
     : MENU_ITEMS.filter((item) => item.category === selectedCategory);
 
   const whatsappSpecialUrl = `https://wa.me/${BUSINESS_INFO.whatsappRaw}?text=${encodeURIComponent(
-    'Hello CODE-8! 🍽️ I would like to inquire about your daily specials and additional menu items ("And Much More...")!'
+    'Hello CODE-8! 🍽️ I would like to inquire about your daily specials, proteins and additional menu items ("And Much More...")!'
   )}`;
 
   return (
@@ -50,7 +55,7 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
             Explore Our Menu
           </h2>
           <p className="text-base sm:text-lg text-brand-charcoal-muted font-normal">
-            Good food, great vibes. Find something delicious.
+            Good food, great vibes. Find something delicious from our meals, fresh proteins, snacks, and chilled drinks.
           </p>
         </div>
 
@@ -88,9 +93,11 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
               key={item.id}
               item={item}
               currentQuantity={orderQuantities[item.id] || 0}
+              selectedSoup={selectedSoups?.[item.id]}
               onAddToCart={onAddToCart}
               onUpdateQuantity={onUpdateQuantity}
               onRemove={onRemove}
+              onSelectSoup={onSelectSoup}
             />
           ))}
 
@@ -110,7 +117,7 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
               </h3>
 
               <p className="text-sm text-brand-cream-soft/90 leading-relaxed mb-6 font-normal">
-                Looking for extra sides, proteins, specials, or custom event orders? CODE-8 prepares a variety of daily specials. Reach out to ask what else is cooking in our kitchen today!
+                Looking for extra sides, assorted meats, specials, or catering for private events? CODE-8 prepares daily kitchen specials. Reach out to inquire what else is cooking today!
               </p>
             </div>
 

@@ -1,19 +1,22 @@
-export type MenuCategory = 'all' | 'meals' | 'snacks' | 'drinks';
+export type MenuCategory = 'all' | 'meals' | 'proteins' | 'snacks' | 'drinks';
 
 export interface MenuItem {
   id: string;
   name: string;
-  category: 'meals' | 'snacks' | 'drinks';
+  category: 'meals' | 'proteins' | 'snacks' | 'drinks';
   categoryLabel: string;
   description: string;
   image: string;
   imageAlt: string;
   badge?: string;
+  isSwallow?: boolean;
+  soupOptions?: string[];
 }
 
 export interface OrderItem {
   item: MenuItem;
   quantity: number;
+  selectedSoup?: string;
 }
 
 export type OrderType = 'pickup' | 'delivery';

@@ -101,8 +101,8 @@ export const Hero: React.FC<HeroProps> = ({ onExploreMenu, onOpenOrder }) => {
                 {/* Hero Showcase Image */}
                 <div className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-brand-green-dark group">
                   <img
-                    src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1000&q=80"
-                    alt="CODE-8 Nigerian Jollof Rice Showcase"
+                    src="https://images.unsplash.com/photo-1664993101841-036f189719b6?auto=format&fit=crop&w=1000&q=80"
+                    alt="CODE-8 Authentic Nigerian Jollof Rice Showcase"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     onError={(e) => {
                       e.currentTarget.src = FALLBACK_FOOD_IMAGE;
@@ -119,16 +119,16 @@ export const Hero: React.FC<HeroProps> = ({ onExploreMenu, onOpenOrder }) => {
                   {/* Bottom Text Overlay */}
                   <div className="absolute bottom-3 left-3 right-3 text-white">
                     <p className="text-xs font-bold text-brand-gold-light uppercase tracking-wider">CODE-8 Signature</p>
-                    <p className="text-lg font-black tracking-tight">Authentic Jollof, Amala, Snacks & Chilled Drinks</p>
+                    <p className="text-lg font-black tracking-tight">Authentic Jollof, Amala, Proteins, Snacks & Drinks</p>
                   </div>
                 </div>
 
-                {/* Mini Mosaic Thumbnails: Snacks & Drinks */}
+                {/* Mini Mosaic Thumbnails: Swallow, Snacks & Drinks */}
                 <div className="grid grid-cols-3 gap-2.5 mt-3">
                   <div className="relative rounded-xl overflow-hidden aspect-square bg-brand-cream-soft group">
                     <img
-                      src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=350&q=80"
-                      alt="Amala"
+                      src="https://commons.wikimedia.org/wiki/Special:FilePath/Amala_and_Abula.jpg"
+                      alt="Amala and Abula"
                       className="w-full h-full object-cover transition-transform group-hover:scale-110"
                       onError={(e) => { e.currentTarget.src = FALLBACK_FOOD_IMAGE; }}
                     />
@@ -139,25 +139,25 @@ export const Hero: React.FC<HeroProps> = ({ onExploreMenu, onOpenOrder }) => {
 
                   <div className="relative rounded-xl overflow-hidden aspect-square bg-brand-cream-soft group">
                     <img
-                      src="https://images.unsplash.com/photo-1562007908-859b4ba9a1a2?auto=format&fit=crop&w=350&q=80"
-                      alt="Golden Pie"
+                      src="./images/meat-pie.jpg"
+                      alt="Golden Baked Nigerian Meat Pie"
                       className="w-full h-full object-cover transition-transform group-hover:scale-110"
                       onError={(e) => { e.currentTarget.src = FALLBACK_FOOD_IMAGE; }}
                     />
                     <div className="absolute inset-0 bg-black/35 flex items-end p-1.5">
-                      <span className="text-[11px] font-bold text-white leading-tight">Pie</span>
+                      <span className="text-[11px] font-bold text-white leading-tight">Meat Pie</span>
                     </div>
                   </div>
 
                   <div className="relative rounded-xl overflow-hidden aspect-square bg-brand-cream-soft group">
                     <img
-                      src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=350&q=80"
-                      alt="Chilled Zobo"
+                      src="./images/zobo.jpg"
+                      alt="Chilled Zobo Hibiscus Drink in Bottle"
                       className="w-full h-full object-cover transition-transform group-hover:scale-110"
                       onError={(e) => { e.currentTarget.src = FALLBACK_FOOD_IMAGE; }}
                     />
                     <div className="absolute inset-0 bg-black/35 flex items-end p-1.5">
-                      <span className="text-[11px] font-bold text-white leading-tight">Zobo</span>
+                      <span className="text-[11px] font-bold text-white leading-tight">Zobo (Bottled)</span>
                     </div>
                   </div>
                 </div>
